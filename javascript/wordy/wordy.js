@@ -4,10 +4,17 @@ export class WordProblem {
   }
 
   answer() {
-    let index1;
-    let index2;
     const questionString = this.question
+    const matched = this.parse(questionString)
 
-    console.log(questionString.match(/(-?\d+)\s([a-z\s]+)(-?\d+)/))
+    console.log(matched[2])
+  }
+
+  parse(queryString){
+    return queryString.match(/(-?\d+)\s([a-z\s]+)(-?\d+)/)
+  }
+
+  analyse(matchArray){
+    
   }
 }
