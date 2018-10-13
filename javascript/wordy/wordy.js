@@ -13,20 +13,25 @@ export class WordProblem {
   }
 
   parse(queryString) {
-    return queryString.match(/(-?\d+)\s([a-z\s]+)(-?\d+)/);
+    return queryString.match(/(-?\d+)\s([a-z\s]+)(-?\d+)\s?(([a-z\s]+)(-?\d+))?/);
   }
 
   analyse(matchArray) {
     const operatorString = matchArray[2];
+    let firstOperation;
 
     if (operatorString.includes('plus')){
-      return parseInt(matchArray[1]) + parseInt(matchArray[3])
+      firstOperation = parseInt(matchArray[1]) + parseInt(matchArray[3])
     }else if(operatorString.includes('minus')){
-      return parseInt(matchArray[1]) - parseInt(matchArray[3])
+      firstOperation = parseInt(matchArray[1]) - parseInt(matchArray[3])
     }else if(operatorString.includes('multiplied')){
-      return parseInt(matchArray[1]) * parseInt(matchArray[3])
+       firstOperation = parseInt(matchArray[1]) * parseInt(matchArray[3])
     }else if(operatorString.includes('divided')){
-      return parseInt(matchArray[1]) / parseInt(matchArray[3])
+      firstOperation = parseInt(matchArray[1]) / parseInt(matchArray[3])
+    }
+
+    if(!matchArray[4]){
+      return firstOperation;
     }
   }
 }
