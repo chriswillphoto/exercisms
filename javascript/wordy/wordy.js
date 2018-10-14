@@ -9,6 +9,8 @@ export class WordProblem {
 
     if(matched){
       return this.analyse(matched)
+    }else{
+      throw new ArgumentError
     }
   }
 
@@ -48,5 +50,11 @@ export class WordProblem {
       return secondOperation
     }
     
+  }
+}
+
+export class ArgumentError {
+  constructor(){
+    {}
   }
 }
