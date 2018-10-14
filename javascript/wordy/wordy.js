@@ -53,8 +53,6 @@ export class WordProblem {
   }
 }
 
-export class ArgumentError {
-  constructor(){
-    {}
-  }
+export class ArgumentError extends Error {
+
 }
