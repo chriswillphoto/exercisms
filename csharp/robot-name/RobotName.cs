@@ -5,7 +5,7 @@ using System.Linq;
 public class Robot
 {
     private string RobotName;
-    private string[] UsedNames;
+    private string[] UsedNames = {};
 
     public Robot(){
         Reset();
@@ -20,30 +20,39 @@ public class Robot
 
     public void Reset()
     {
-        
+        var NewName = NameConstructor();
+
+        while( UsedNames.Contains(NewName) )
+        {
+            NewName = NameConstructor();
+        }
+
+        RobotName = NewName;
+
     }
 
     public string NameConstructor()
     {
         char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
         var NewRobotName = new List<string>();
-
+        var random = new Random();
+        int RandomNum;
+        int RandomIndex;
         for (int i = 0; i < 5; i++)
         {   
             if(i < 2)
             {
-                var random = new Random();
-                var RandomIndex = random.Next(0, alpha.Count());
+                RandomIndex = random.Next(0, alpha.Count());
                 NewRobotName.Add(alpha[RandomIndex].ToString());
             }
             else
             {
-                var random = new Random();
-                var RandomNum = random.Next(0, 10);
+                RandomNum = random.Next(0, 10);
                 NewRobotName.Add(RandomNum.ToString());
             }
         }
+        var NewRobotNameJoined = string.Join("", NewRobotName);
 
-        
+        return NewRobotNameJoined;
     }
 }
