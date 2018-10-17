@@ -5,7 +5,7 @@ using System.Linq;
 public class Robot
 {
     private string RobotName;
-    private string[] UsedNames = {};
+    public static string[] UsedNames = {};
 
     public Robot(){
         Reset();
