@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 public static class Pangram
 {
     public static bool IsPangram(string input)
     {
-        char[] alpha = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-        int alphaCounter = 0;
+        List<string> LetterArray = new List<string>();
 
-        for (int i = 0; i < input.Length; i++)
+        foreach(char letter in input.ToLower())
         {
-            for (int j = 0; j < 26; j++)
+            if( Regex.IsMatch(letter.ToString(), "[a-z]") && !LetterArray.Contains(letter.ToString()) )
             {
-                
+                LetterArray.Add(letter.ToString());
             }
         }
 
+        return LetterArray.Count() == 26 ? true : false;
     }
 }
