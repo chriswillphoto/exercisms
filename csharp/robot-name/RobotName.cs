@@ -5,11 +5,12 @@ using System.Linq;
 public class Robot
 {
   private string RobotName;
+  private NameConstructor nameConstructor = new NameConstructor();
   public static HashSet<string> UsedNames = new HashSet<string>();
 
   public Robot()
   {
-    Reset();
+    RobotName = nameConstructor.NewName();
   }
   public string Name
   {
@@ -21,7 +22,6 @@ public class Robot
 
   public void Reset()
   {
-    NameConstructor nameConstructor = new NameConstructor();
     var NewName = nameConstructor.NewName();
 
     while (UsedNames.Contains(NewName))
