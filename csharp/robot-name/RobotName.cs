@@ -5,7 +5,7 @@ using System.Linq;
 public class Robot
 {
   private string RobotName;
-  public static string[] UsedNames = { };
+  public static HashSet<string> UsedNames = new HashSet<string>();
 
   public Robot()
   {
@@ -29,6 +29,7 @@ public class Robot
       NewName = nameConstructor.NewName();
     }
 
+    UsedNames.Add(NewName);
     RobotName = NewName;
 
   }
