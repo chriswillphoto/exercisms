@@ -4,55 +4,61 @@ using System.Linq;
 
 public class Robot
 {
-    private string RobotName;
-    public static string[] UsedNames = {};
+  private string RobotName;
+  public static string[] UsedNames = { };
 
-    public Robot(){
-        Reset();
-    }
-    public string Name
+  public Robot()
+  {
+    Reset();
+  }
+  public string Name
+  {
+    get
     {
-        get
-        {
-            return RobotName;
-        }
+      return RobotName;
     }
+  }
 
-    public void Reset()
+  public void Reset()
+  {
+    NameConstructor nameConstructor = new NameConstructor();
+    var NewName = nameConstructor.NewName();
+
+    while (UsedNames.Contains(NewName))
     {
-        var NewName = NameConstructor();
-
-        while( UsedNames.Contains(NewName) )
-        {
-            NewName = NameConstructor();
-        }
-
-        RobotName = NewName;
-
+      NewName = nameConstructor.NewName();
     }
 
-    public string NameConstructor()
+    RobotName = NewName;
+
+  }
+
+
+}
+
+public class NameConstructor
     {
-        char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-        var NewRobotName = new List<string>();
-        var random = new Random();
-        int RandomNum;
-        int RandomIndex;
-        for (int i = 0; i < 5; i++)
-        {   
-            if(i < 2)
+        public string NewName()
             {
+            char[] alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+            var NewRobotName = new List<string>();
+            var random = new Random();
+            int RandomNum;
+            int RandomIndex;
+            for (int i = 0; i < 5; i++)
+            {
+                if (i < 2)
+                {
                 RandomIndex = random.Next(0, alpha.Count());
                 NewRobotName.Add(alpha[RandomIndex].ToString());
-            }
-            else
-            {
+                }
+                else
+                {
                 RandomNum = random.Next(0, 10);
                 NewRobotName.Add(RandomNum.ToString());
+                }
             }
-        }
-        var NewRobotNameJoined = string.Join("", NewRobotName);
-
-        return NewRobotNameJoined;
+            var NewRobotNameJoined = string.Join("", NewRobotName);
+            return NewRobotNameJoined;
+            }
     }
-}
